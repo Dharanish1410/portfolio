@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dharanish B — Computer Science Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-raised:#FFFFFF;
+    --ink:#1C2321;
+    --ink-soft:#5B6460;
+    --line:#DCD6C7;
+    --pine:#2F5D50;
+    --pine-deep:#203F37;
+    --copper:#B5774A;
+    --max:760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--pine); color:#fff;}
+
+  a{color:inherit;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(246,243,236,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px;
+  }
+  .brand{
+    font-family:'Fraunces', serif; font-weight:600; font-size:19px;
+    letter-spacing:-0.01em;
+  }
+  .navlinks{display:flex; gap:22px; font-size:14px;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .navlinks a:hover{color:var(--pine-deep);}
+  @media (max-width:600px){.navlinks{gap:14px; font-size:12.5px;}}
+
+  /* HERO */
+  header.hero{padding:76px 0 56px;}
+  .hero-row{display:flex; gap:36px; align-items:center;}
+  .avatar{
+    flex:none;
+    width:104px; height:104px; border-radius:50%;
+    background:var(--pine);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:600; font-size:36px;
+    box-shadow:0 0 0 4px var(--paper), 0 0 0 5px var(--line);
+  }
+  .hero-text .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--copper);
+    margin:0 0 10px;
+  }
+  .hero-text .kicker::before{content:"~/";}
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(34px, 5vw, 48px);
+    line-height:1.05;
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    font-size:17px; color:var(--ink-soft); margin:0 0 18px; max-width:52ch;
+  }
+  .status{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:13px; font-family:'IBM Plex Mono', monospace;
+    color:var(--pine-deep);
+    background:#E9E3D2; border:1px solid var(--line);
+    padding:5px 11px; border-radius:20px;
+  }
+  .status .dot{width:7px; height:7px; border-radius:50%; background:#3E8E6D;}
+  @media (max-width:560px){
+    .hero-row{flex-direction:column; align-items:flex-start; gap:20px;}
+  }
+
+  section{padding:44px 0;}
+  section + section{border-top:1px solid var(--line);}
+
+  .head{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:22px;
+  }
+  .head .idx{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--copper);
+  }
+  h2{
+    font-family:'Fraunces', serif; font-weight:600; font-size:24px; margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  /* ABOUT */
+  .about-text{max-width:64ch; color:var(--ink-soft); font-size:15.5px;}
+  .about-text strong{color:var(--ink); font-weight:600;}
+
+  .facts{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px 28px;
+    margin-top:26px; font-size:14px;
+  }
+  .facts dt{font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); font-size:12.5px; margin-bottom:2px;}
+  .facts dd{margin:0; font-weight:500;}
+  @media (max-width:520px){.facts{grid-template-columns:1fr;}}
+
+  /* SKILLS as tags */
+  .skill-group{margin-bottom:18px;}
+  .skill-group:last-child{margin-bottom:0;}
+  .skill-group .label{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft);
+    width:110px; display:inline-block; vertical-align:top; padding-top:6px;
+  }
+  .tags{display:inline-flex; flex-wrap:wrap; gap:8px; max-width:calc(100% - 120px);}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    background:var(--paper-raised); border:1px solid var(--line);
+    padding:4px 10px; border-radius:5px; color:var(--pine-deep);
+  }
+  @media (max-width:520px){
+    .skill-group .label{display:block; width:auto; margin-bottom:6px;}
+    .tags{max-width:100%;}
+  }
+
+  /* PROJECTS - git log style */
+  .commit{
+    position:relative;
+    padding:0 0 26px 26px;
+    border-left:2px solid var(--line);
+  }
+  .commit:last-child{padding-bottom:2px;}
+  .commit::before{
+    content:"";
+    position:absolute; left:-7px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--pine);
+  }
+  .commit-hash{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--copper);
+  }
+  .commit h3{
+    font-family:'Fraunces', serif; font-size:19px; font-weight:600; margin:4px 0 6px;
+  }
+  .commit p{margin:0 0 10px; font-size:14.5px; color:var(--ink-soft); max-width:60ch;}
+  .commit ul{margin:0 0 10px; padding-left:18px; font-size:14.5px; color:var(--ink-soft);}
+  .commit ul li{margin-bottom:4px;}
+  .stack{display:flex; flex-wrap:wrap; gap:6px;}
+  .stack span{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    background:var(--paper-raised); border:1px solid var(--line);
+    padding:2px 8px; border-radius:4px; color:var(--ink-soft);
+  }
+
+  /* CERTS */
+  .cert-list{list-style:none; margin:0; padding:0;}
+  .cert-list li{
+    display:flex; justify-content:space-between; gap:16px;
+    padding:12px 0; border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .cert-list li:last-child{border-bottom:none;}
+  .cert-list .name{font-weight:500;}
+  .cert-list .issuer{color:var(--ink-soft); font-size:13px; font-family:'IBM Plex Mono', monospace;}
+
+  /* ACHIEVEMENTS */
+  .ach-list{margin:0; padding-left:18px; font-size:14.5px; color:var(--ink-soft);}
+  .ach-list li{margin-bottom:8px;}
+
+  /* CONTACT */
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:6px;
+  }
+  .contact-row a{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:14px; text-decoration:none;
+    background:var(--pine); color:#fff;
+    padding:10px 18px; border-radius:6px;
+    font-weight:500;
+    transition:background .15s;
+  }
+  .contact-row a:hover{background:var(--pine-deep);}
+  .contact-row a.ghost{
+    background:transparent; color:var(--ink); border:1px solid var(--line);
+  }
+  .contact-row a.ghost:hover{border-color:var(--pine);}
+
+  footer{
+    padding:30px 0 50px; text-align:center;
+    font-size:12.5px; color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Dharanish B</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certs">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-row">
+      <div class="avatar">DB</div>
+      <div class="hero-text">
+        <p class="kicker">final-year-cse</p>
+        <h1>Dharanish B</h1>
+        <p class="role">Computer Science Engineering student building full-stack web applications with React, Node.js and MongoDB — looking for an internship or entry-level role where I can ship real product.</p>
+        <span class="status"><span class="dot"></span>Open to internships · graduating 2027</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="head"><span class="idx">01</span><h2>About</h2></div>
+    <p class="about-text">
+      I'm a final-year <strong>B.E. Computer Science Engineering</strong> student at Nandha College of Technology, Erode, graduating in 2027. Most of my time goes into building complete applications — from REST APIs and database schemas to the interfaces people actually click on. I work mainly in <strong>Java, Python and JavaScript</strong>, with a full-stack toolkit of <strong>React, Node.js, Express and MongoDB</strong>, and I've picked up a bit of data analytics along the way.
+    </p>
+    <dl class="facts">
+      <div><dt>Education</dt><dd>B.E. CSE, Nandha College of Technology — CGPA 7.5/10</dd></div>
+      <div><dt>Location</dt><dd>Erode, Tamil Nadu</dd></div>
+      <div><dt>Languages</dt><dd>Tamil, English</dd></div>
+      <div><dt>Coding profiles</dt><dd>LeetCode · GitHub</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="head"><span class="idx">02</span><h2>Skills</h2></div>
+
+    <div class="skill-group">
+      <span class="label">languages</span>
+      <span class="tags">
+        <span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">C</span>
+      </span>
+    </div>
+    <div class="skill-group">
+      <span class="label">frontend</span>
+      <span class="tags">
+        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">React.js</span><span class="tag">Bootstrap</span>
+      </span>
+    </div>
+    <div class="skill-group">
+      <span class="label">backend</span>
+      <span class="tags">
+        <span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">REST APIs</span>
+      </span>
+    </div>
+    <div class="skill-group">
+      <span class="label">databases</span>
+      <span class="tags">
+        <span class="tag">MongoDB</span><span class="tag">MySQL</span><span class="tag">SQL</span>
+      </span>
+    </div>
+    <div class="skill-group">
+      <span class="label">fundamentals</span>
+      <span class="tags">
+        <span class="tag">OOP</span><span class="tag">Data Structures</span><span class="tag">Algorithms</span>
+      </span>
+    </div>
+    <div class="skill-group">
+      <span class="label">tools</span>
+      <span class="tags">
+        <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Eclipse IDE</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="head"><span class="idx">03</span><h2>Projects</h2></div>
+
+    <div class="commit">
+      <div class="commit-hash">project · e-commerce</div>
+      <h3>E-Commerce Platform</h3>
+      <ul>
+        <li>Full-stack shopping site with a responsive interface for browsing and purchasing products</li>
+        <li>User authentication, product management and shopping cart built in</li>
+        <li>REST APIs for users, products, carts and orders, wired to MongoDB</li>
+      </ul>
+      <div class="stack"><span>React.js</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span></div>
+    </div>
+
+    <div class="commit">
+      <div class="commit-hash">project · sustainability</div>
+      <h3>Carbon Emission Control System</h3>
+      <ul>
+        <li>Web-based tool for monitoring carbon emissions and supporting reduction efforts</li>
+        <li>Generates reports and insights so users can review emissions and plan sustainability initiatives</li>
+      </ul>
+    </div>
+
+    <div class="commit">
+      <div class="commit-hash">project · personal finance</div>
+      <h3>Expense Tracker</h3>
+      <ul>
+        <li>Personal expense management app to record income and expenses and track spending over time</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="training">
+  <div class="wrap">
+    <div class="head"><span class="idx">04</span><h2>Training</h2></div>
+    <ul class="ach-list">
+      <li><strong>Full Stack Web Development</strong> — Training Trains, 20 days</li>
+      <li><strong>Data Analytics</strong> — Let's Gamer Tech, 1 week</li>
+    </ul>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="head"><span class="idx">05</span><h2>Certifications</h2></div>
+    <ul class="cert-list">
+      <li><span class="name">Java, Python, SQL, CSS</span><span class="issuer">HackerRank</span></li>
+      <li><span class="name">Oracle Cloud Infrastructure Foundations</span><span class="issuer">Oracle</span></li>
+      <li><span class="name">Data Analytics with Python</span><span class="issuer">NPTEL</span></li>
+      <li><span class="name">Java Programming Fundamentals & Python Programming</span><span class="issuer">Infosys Springboard</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap">
+    <div class="head"><span class="idx">06</span><h2>Achievements &amp; Activities</h2></div>
+    <ul class="ach-list">
+      <li>1st Place — Poster Designing, CSE Intra-Department Meet</li>
+      <li>Participated in the 19th National Level Technical Symposium (2K24)</li>
+      <li>Participated in Kallikrates'25 — Media Thinking and E-Sports events</li>
+      <li>Completed the Electric Vehicles Workshop at CRYPTERA 2024</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head"><span class="idx">07</span><h2>Contact</h2></div>
+    <p class="about-text">Looking for an internship or entry-level opportunity — happy to talk about anything above.</p>
+    <div class="contact-row">
+      <a href="mailto:dharanish2710@gmail.com">Email me</a>
+      <a class="ghost" href="#">LinkedIn</a>
+      <a class="ghost" href="#">GitHub</a>
+      <a class="ghost" href="#">LeetCode</a>
+    </div>
+  </div>
+</section>
+
+<footer>Dharanish B · Erode, Tamil Nadu</footer>
+
+</body>
+</html>
